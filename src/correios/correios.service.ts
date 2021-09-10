@@ -6,7 +6,7 @@ export class CorreiosService {
 
     async rastreio(codigo: string): Promise<any> {
         const rastreioBody = {
-            "code": codigo, 
+            "code": codigo,
             "type": "LS"
         }
 
@@ -14,9 +14,9 @@ export class CorreiosService {
 
         const eventos = [];
 
-        data.objeto[0].evento.map((itemEvento) => {
-            const { data, hora, descricao, unidade: { cidade, tipounidade } } = itemEvento;
-            
+        data.objeto[0].evento.map((eventoItem) => {
+            const { data, hora, descricao, unidade: { cidade, tipounidade } } = eventoItem;
+
             eventos.push({ data, hora, descricao, cidade, tipounidade });
         });
 
