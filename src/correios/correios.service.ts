@@ -12,15 +12,10 @@ export class CorreiosService {
 
         const { data } = await axios.post(`https://correios.contrateumdev.com.br/api/rastreio`, rastreioBody);
 
-        //const rastreio = data.objeto;
-
-        // console.log(rastreio.evento.map((e) => console.log(e)));
-        // console.log(data.objeto[0])
-
         const eventos = [];
 
-        data.objeto[0].evento.map((e) => {
-            const { data, hora, descricao, unidade: { cidade, tipounidade } } = e
+        data.objeto[0].evento.map((itemEvento) => {
+            const { data, hora, descricao, unidade: { cidade, tipounidade } } = itemEvento;
             
             eventos.push({ data, hora, descricao, cidade, tipounidade });
         });
