@@ -1,0 +1,1 @@
+export declare type NodeParameterValue = string | number | boolean | undefined | null;
