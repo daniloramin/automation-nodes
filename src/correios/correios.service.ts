@@ -5,6 +5,7 @@ import axios from 'axios';
 export class CorreiosService {
 
     async rastreio(codigo: string): Promise<any> {
+			const rastrearPedido = "https://api.rastrearpedidos.com.br/api/rastreio/v1?codigo=LB243550059HK";
         const rastreioBody = {
             "code": codigo,
             "type": "LS"
