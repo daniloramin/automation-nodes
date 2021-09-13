@@ -44,25 +44,22 @@ export class IfService {
 
 		let retornoTrue: Array<any> = [];
 		let retornoFalse: Array<any>= [];
+		let comparacao: boolean;
 
-		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
-				let comparacao = compareOperation[items["operation"][itemIndex]](items[itemIndex].value1, items[itemIndex].value2);
+		for (let itemIndex = 0; itemIndex < items["items"].length; itemIndex++) {
+			for (let itemOperation = 0; itemOperation < items["operation"].length; itemOperation++) {
 
-				if(comparacao) {
-					retornoTrue.push(items[0]);
-				}
-
-				if(!comparacao) {
-					retornoFalse.push(items[0]);
-				}
+				comparacao = compareOperation[items["operation"][itemOperation]](items["items"][itemIndex]["value1"], items["items"][itemIndex]["value2"]);
 			}
 
-			return [retornoTrue, retornoFalse];
+			if(comparacao) {
+				retornoTrue.push(items["items"][itemIndex]);
+			} else {
+				retornoFalse.push(items["items"][itemIndex]);
+			}
 		}
 
-		// items[0].values.forEach((item) => {
-		// 	let comparacao = compareOperation[operation](item.value1, item.value2);
+		return [{true: retornoTrue, false: retornoFalse}];
+	}
 
-		// });
 }
-
