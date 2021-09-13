@@ -9,7 +9,7 @@ export class IfController {
 
 	@Post()
 	@UsePipes(ValidationPipe)
-	testIf(@Body() body: IfDTO) {
+	testIf(@Body() body: IfDTO[]) {
 
 		return this.ifService.execute(body);
 	}
