@@ -2,11 +2,12 @@ import { IsNotEmpty } from "class-validator";
 
 export class IfDTO {
 	@IsNotEmpty()
-	value1: string | number | boolean;
+	condition: string;
 
 	@IsNotEmpty()
-	value2: string | number | boolean;
+	operation: [];
 
 	@IsNotEmpty()
-	operation: string;
+	items: [];
+
 }

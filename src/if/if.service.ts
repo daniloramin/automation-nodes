@@ -4,7 +4,7 @@ import { IfDTO } from './dtos/if-statement.dto';
 @Injectable()
 export class IfService {
 
-	execute(items: IfDTO[]) {
+	execute(items: any[]) {
 
 		type ParameterValue = string | number | boolean | undefined | null;
 
@@ -27,6 +27,8 @@ export class IfService {
 			regex: (value1: ParameterValue, value2: ParameterValue) => {
 				const regexMatch = (value2 || '').toString().match(new RegExp('^/(.*?)/([gimusy]*)$'));
 
+
+
 				let regex: RegExp;
 				if (!regexMatch) {
 					regex = new RegExp((value2 || '').toString());
@@ -40,18 +42,27 @@ export class IfService {
 			},
 		};
 
-		let retornoTrue: Array<IfDTO> = [];
-		let retornoFalse: Array<IfDTO>= [];
+		let retornoTrue: Array<any> = [];
+		let retornoFalse: Array<any>= [];
 
-		items.map((item) => {
-			let comparacao = compareOperation[item.operation](item.value1, item.value2);
-			if (comparacao) {
-				retornoTrue.push(item);
-			} else {
-				retornoFalse.push(item);
+		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
+				let comparacao = compareOperation[items["operation"][itemIndex]](items[itemIndex].value1, items[itemIndex].value2);
+
+				if(comparacao) {
+					retornoTrue.push(items[0]);
+				}
+
+				if(!comparacao) {
+					retornoFalse.push(items[0]);
+				}
 			}
-		});
 
-		return [retornoTrue, retornoFalse];
-	}
+			return [retornoTrue, retornoFalse];
+		}
+
+		// items[0].values.forEach((item) => {
+		// 	let comparacao = compareOperation[operation](item.value1, item.value2);
+
+		// });
 }
+
